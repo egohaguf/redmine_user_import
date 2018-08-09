@@ -5,7 +5,7 @@ class UserImportController < ApplicationController
 
   before_action :require_admin
 
-  USER_ATTRS = [:login, :password, :lastname, :firstname, :mail, :admin]
+  USER_ATTRS = [:login, :password, :lastname, :firstname, :auth_source, :mail, :admin]
 
   def index
   end
@@ -96,6 +96,7 @@ class UserImportController < ApplicationController
         user.lastname = row[attrs_map["lastname"]]
         user.firstname = row[attrs_map["firstname"]]
         user.mail = row[attrs_map["mail"]]
+	user.auth_source_id = row[attrs_map["auth_source"]]
         user.admin = row[attrs_map["admin"]]
       else
         flash.now[:warning] = l(:message_unique_filed_duplicated)
